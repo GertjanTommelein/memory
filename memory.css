@@ -1,5 +1,5 @@
 body {
-    background-image:url("/images/skyblueice.jpg");
+    background-image:url("images/skyblueice.jpg");
     background-repeat: no-repeat;
 }
 #game-container {
