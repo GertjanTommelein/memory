@@ -1,8 +1,17 @@
+const categorie = {
+    cats: {
+        source: ["images/kitten.jpg","images/kitten2.jpg"]
+    }
+};
+
+
+const blockClick = document.getElementById("modal-game-block");
 const gameContainer = document.getElementById("game-container");
 const flipped = document.getElementsByClassName("on");
+const cards = 30;
 var timer = setTimeout(flipBack,1000);
 function generateCards() {
-for(let i=0;i<25;i++) {
+for(let i=0;i<cards;i++) {
     let newDiv = document.createElement("div");
     let newImg = document.createElement("img");
     let newImgBack = document.createElement("img");
@@ -10,8 +19,8 @@ for(let i=0;i<25;i++) {
     newDiv.setAttribute("class","card-container");
     newImg.setAttribute("class","card-front");
     newImgBack.setAttribute("class","card-back");
-    newImg.style.backgroundImage = "url(placeholder-150.jpg)";
-    newImgBack.style.backgroundImage = "url(kitten.jpg)";
+    newImg.style.backgroundImage = "url(images/placeholder-150.jpg)";
+    newImgBack.style.backgroundImage = "url(" + categorie.cats.source[1] + ")";
     newDiv.appendChild(newImgBack);
     newDiv.appendChild(newImg);
     gameContainer.appendChild(newDiv);
@@ -36,6 +45,9 @@ for(let i=0;i<25;i++) {
 
 function compare() {
     if(flipped.length == 2) {
+        // blockClick is a modal that comes up when 2 cards have been clicked
+        // and *blocks* the user from clicking more cards.
+        blockClick.style.display = "block";
         console.log("works");
         timer = setTimeout(flipBack, 2000);
     }
@@ -47,7 +59,7 @@ function flipBack() {
 while(flipped.length != 0) {
     flipped[0].classList.remove("on");
 }
-    
+    blockClick.style.display = "none";
     
 }
 

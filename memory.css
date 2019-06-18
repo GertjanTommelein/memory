@@ -1,17 +1,22 @@
+body {
+    background-image:url("/images/skyblueice.jpg");
+    background-repeat: no-repeat;
+}
 #game-container {
     position: relative;
     display:flex;
     justify-content:space-evenly;
-    width:640px;
+    width:780px;
     height:840px;
-    border:1px solid black;
+    border:0px solid black;
     flex-wrap:wrap;
+    margin:0 auto;
+    margin-top:3em;
 }
 .card-container {
-    
+    border-radius:4px;
     height:150px;
     width:125px;
-    background-color:red;
     margin-top:2px;
     transform-style: preserve-3d;
     transition:all 0.5s ease;
@@ -43,4 +48,12 @@
 }
 .off {
     transform: rotateY(0);
+}
+#modal-game-block {
+    display:none;
+    width:780px;
+    height:840px;
+    position:absolute;
+    background-color:transparent;
+    z-index:99;
 }
