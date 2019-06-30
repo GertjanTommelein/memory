@@ -20,7 +20,6 @@ body {
     margin-top:2px;
     transform-style: preserve-3d;
     transition:all 0.5s ease;
-    transform:rotateY(180deg);
 }
 .do-flip {
     transform:rotateY(180deg);

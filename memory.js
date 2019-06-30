@@ -14,6 +14,8 @@ const gameContainer = document.getElementById("game-container");
 const flipped = document.getElementsByClassName("on");
 const cards = 30;
 var timer = setTimeout(flipBack,1000);
+
+
 function generateCards() {
 for(let i=0;i<cards;i++) {
     let newDiv = document.createElement("div");
@@ -82,7 +84,7 @@ function randomizeImages(array){
         // adds the first image to a random card
         if(i == 0) {
             
-                random = Math.floor(Math.random() * 30);
+                random = Math.floor(Math.random() * cards);
             
             document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
             usedNums.push(random);
@@ -94,7 +96,7 @@ function randomizeImages(array){
         // while true, set random to a new random number
         while(usedNums.includes(random)) {
 
-            random = Math.floor(Math.random() * 30);
+            random = Math.floor(Math.random() * cards);
         }
         
         // push random into usedNums so that number doesnt get used again
