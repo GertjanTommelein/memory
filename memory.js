@@ -1,6 +1,10 @@
 const categorie = {
     cats: {
-        source: ["images/kitten.jpg","images/kitten2.jpg"]
+        source: ["images/kitten.jpg","images/kitten2.jpg","images/kitten3.jpg",
+                 "images/kitten4.jpg","images/kitten5.jpg","images/kitten6.jpg",
+                 "images/kitten7.jpg","images/kitten8.jpg","images/kitten9.jpg",
+                 "images/kitten10.jpg","images/kitten11.jpg","images/kitten12.jpg",
+                 "images/kitten13.jpg","images/kitten14.jpg","images/kitten15.jpg"]
     }
 };
 
@@ -20,7 +24,9 @@ for(let i=0;i<cards;i++) {
     newImg.setAttribute("class","card-front");
     newImgBack.setAttribute("class","card-back");
     newImg.style.backgroundImage = "url(images/placeholder-150.jpg)";
-    newImgBack.style.backgroundImage = "url(" + categorie.cats.source[1] + ")";
+
+
+    //newImgBack.style.backgroundImage = "url(" + categorie.cats.source[1] + ")";
     newDiv.appendChild(newImgBack);
     newDiv.appendChild(newImg);
     gameContainer.appendChild(newDiv);
@@ -64,7 +70,48 @@ while(flipped.length != 0) {
 }
 
 
+function randomizeImages(array){
+    
+        let count = 0;
+        let random = Math.floor(Math.random() * 30);
+        let usedNums = [];
+    // Distribute images randomly to the cards
+    for(let i=0; i< (array.length * 2 -1);i++) {
+        
+
+        // adds the first image to a random card
+        if(i == 0) {
+            
+                random = Math.floor(Math.random() * 30);
+            
+            document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+            usedNums.push(random);
+        }
+
+        
+
+        // checks if random has already been used
+        // while true, set random to a new random number
+        while(usedNums.includes(random)) {
+
+            random = Math.floor(Math.random() * 30);
+        }
+        
+        // push random into usedNums so that number doesnt get used again
+        usedNums.push(random);
+        
+        // sets the  image to a random card
+        document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+        // everytime two images have been placed, grab a new image
+        if((i % 2) == 0) {
+            count++;
+        }
+    }
+    return usedNums;
+}
+
+
 
 
 generateCards();
-
+randomizeImages(categorie.cats.source);
