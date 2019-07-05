@@ -2,6 +2,16 @@ body {
     background-image:url("images/skyblueice.jpg");
     background-repeat: no-repeat;
 }
+#score {
+    margin:0 auto;
+    width:770px;
+    display:flex;
+    justify-content:flex-end;
+    font-size:2.5em;
+}
+#score-total {
+    padding-left:1em;
+}
 #game-container {
     position: relative;
     display:flex;
@@ -58,4 +68,7 @@ body {
     position:absolute;
     background-color:transparent;
     z-index:99;
+}
+.solved {
+    transform: rotateY(180deg);
 }

@@ -1,3 +1,4 @@
+// Database
 const categorie = {
     cats: {
         source: ["images/kitten.jpg","images/kitten2.jpg","images/kitten3.jpg",
@@ -8,14 +9,17 @@ const categorie = {
     }
 };
 
-
+// initialize stuff
+const scoreBoard = document.getElementById("score");
 const blockClick = document.getElementById("modal-game-block");
 const gameContainer = document.getElementById("game-container");
 const flipped = document.getElementsByClassName("on");
 const cards = 30;
+let score = 0;
 var timer = setTimeout(flipBack,1000);
 
 
+/********************* FUNCTIONS **********************/
 function generateCards() {
 for(let i=0;i<cards;i++) {
     let newDiv = document.createElement("div");
@@ -35,7 +39,11 @@ for(let i=0;i<cards;i++) {
 
     // Toggle function to flip cards
     var card = document.getElementsByClassName("card-container")[i];
-    card.addEventListener('click', function() {
+
+    
+
+    card.addEventListener('click', functionToggle);
+    /*function() {
 	    if (!this.classList.contains('on')) {
 		    this.classList.remove('off');
             this.classList.add('on');
@@ -45,19 +53,49 @@ for(let i=0;i<cards;i++) {
 		    this.classList.add('off');
         }
         compare();
-    });
+    });*/
 
 
     }
 }
 
+let functionToggle = function() {
+	    if (!this.classList.contains('on')) {
+		    this.classList.remove('off');
+            this.classList.add('on');
+            
+	    } else {
+		    this.classList.remove('on');
+		    this.classList.add('off');
+        }
+        compare();
+    }
+
 function compare() {
+    
     if(flipped.length == 2) {
-        // blockClick is a modal that comes up when 2 cards have been clicked
+        console.log(flipped[0].children[0].id);
+        console.log(flipped[1].children[0].id);
+        // checks if the two images clicked are the same
+        if(flipped[0].children[0].id == flipped[1].children[0].id) {
+            let tempFlipped = [...flipped];
+            tempFlipped[0].classList.remove("on");
+            tempFlipped[0].classList.add("solved");
+            tempFlipped[1].classList.remove("on");
+            tempFlipped[1].classList.add("solved");
+
+            tempFlipped[0].removeEventListener("click", functionToggle);
+            tempFlipped[1].removeEventListener("click", functionToggle);
+            score += 100;
+            scoreBoard.children[0].innerHTML = score;
+        }else {
+            // blockClick is a modal that comes up when 2 cards have been clicked
         // and *blocks* the user from clicking more cards.
         blockClick.style.display = "block";
         console.log("works");
         timer = setTimeout(flipBack, 2000);
+        }
+        
     }
 
 
@@ -87,6 +125,7 @@ function randomizeImages(array){
                 random = Math.floor(Math.random() * cards);
             
             document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+            document.getElementsByClassName("card-back")[random].setAttribute("id",count+1);
             usedNums.push(random);
         }
 
@@ -104,6 +143,7 @@ function randomizeImages(array){
         
         // sets the  image to a random card
         document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+        document.getElementsByClassName("card-back")[random].setAttribute("id",count+1);
         // everytime two images have been placed, grab a new image
         if((i % 2) == 0) {
             count++;
@@ -114,6 +154,6 @@ function randomizeImages(array){
 
 
 
-
+// on load
 generateCards();
 randomizeImages(categorie.cats.source);
