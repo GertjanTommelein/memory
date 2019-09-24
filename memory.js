@@ -1,11 +1,19 @@
 // Database
 const categorie = {
     cats: {
-        source: ["images/kitten.jpg","images/kitten2.jpg","images/kitten3.jpg",
+        source: ["images/kitten.jpg","images/kitten2_optimized.jpg","images/kitten3.jpg",
                  "images/kitten4.jpg","images/kitten5.jpg","images/kitten6.jpg",
                  "images/kitten7.jpg","images/kitten8.jpg","images/kitten9.jpg",
                  "images/kitten10.jpg","images/kitten11.jpg","images/kitten12.jpg",
                  "images/kitten13.jpg","images/kitten14.jpg","images/kitten15.jpg"]
+    },
+    dogs: {
+        source: [
+            "images/dogs/dog1.jpg","images/dogs/dog2.jpg","images/dogs/dog3.jpg","images/dogs/dog4.jpg",
+            "images/dogs/dog5.jpg","images/dogs/dog6.jpg","images/dogs/dog7.jpg","images/dogs/dog8.jpg",
+            "images/dogs/dog9.jpg","images/dogs/dog10.jpg","images/dogs/dog11.jpg","images/dogs/dog12.jpg",
+            "images/dogs/dog13.jpg","images/dogs/dog14.jpg","images/dogs/dog15.jpg"
+        ]
     }
 };
 
@@ -65,8 +73,8 @@ let functionToggle = function() {
             this.classList.add('on');
             
 	    } else {
-		    this.classList.remove('on');
-		    this.classList.add('off');
+		    /*this.classList.remove('on');
+		    this.classList.add('off');*/
         }
         compare();
     }
@@ -113,23 +121,19 @@ while(flipped.length != 0) {
 function randomizeImages(array){
     
         let count = 0;
-        let random = Math.floor(Math.random() * 30);
+        let random = Math.floor(Math.random() * (array.length * 2));
         let usedNums = [];
     // Distribute images randomly to the cards
     for(let i=0; i< (array.length * 2 -1);i++) {
         
-
         // adds the first image to a random card
         if(i == 0) {
             
-                random = Math.floor(Math.random() * cards);
-            
-            document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+            random = Math.floor(Math.random() * cards);
+            document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + array[count] + ")";
             document.getElementsByClassName("card-back")[random].setAttribute("id",count+1);
             usedNums.push(random);
         }
-
-        
 
         // checks if random has already been used
         // while true, set random to a new random number
@@ -137,12 +141,11 @@ function randomizeImages(array){
 
             random = Math.floor(Math.random() * cards);
         }
-        
         // push random into usedNums so that number doesnt get used again
         usedNums.push(random);
         
         // sets the  image to a random card
-        document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + categorie.cats.source[count] + ")";
+        document.getElementsByClassName("card-back")[random].style.backgroundImage = "url(" + array[count] + ")";
         document.getElementsByClassName("card-back")[random].setAttribute("id",count+1);
         // everytime two images have been placed, grab a new image
         if((i % 2) == 0) {
@@ -150,6 +153,12 @@ function randomizeImages(array){
         }
     }
     return usedNums;
+}
+
+function deleteCards(){
+    document.querySelectorAll(".card-container").forEach(function(c) {
+        c.remove();
+    });
 }
 
 

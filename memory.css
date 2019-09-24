@@ -1,6 +1,7 @@
 body {
-    background-image:url("images/skyblueice.jpg");
+    background-image:url("images/lightbeam.jpg");
     background-repeat: no-repeat;
+    background-position:center;
 }
 #score {
     margin:0 auto;
